@@ -79,3 +79,24 @@ test("misses update board", () => {
   expect(p1.pboat.status).toBe("alive");
   expect(p1.gameboard.board[0][0]).toBe(1);
 });
+
+test("ship updated start and end", () => {
+  const p1 = new Player("tom");
+  p1.gameboard.placeShipV(p1.carrier, [0, 0]);
+  p1.gameboard.placeShipV(p1.pboat, [4, 4]);
+
+  expect(p1.carrier.start).toStrictEqual([0, 0]);
+  expect(p1.carrier.end).toStrictEqual([0, 4]);
+  expect(p1.pboat.start).toStrictEqual([4, 4]);
+  expect(p1.pboat.end).toStrictEqual([4, 5]);
+});
+
+test("unable to place ship on top of ship", () => {
+  const p1 = new Player("tom");
+  p1.gameboard.placeShipV(p1.carrier, [0, 0]);
+  p1.gameboard.placeShipV(p1.pboat, [0, 0]);
+
+  expect(p1.pboat.start).toBe(null);
+  expect(p1.pboat.end).toBe(null);
+  expect(p1.carrier.start).toStrictEqual([0, 0]);
+});
