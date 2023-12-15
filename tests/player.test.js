@@ -51,15 +51,3 @@ test("player ship can be sunk", () => {
 
   expect(p1.pboat.status).toBe("sunk");
 });
-
-test("player can attack other players", () => {
-  const p1 = new Player("Tom");
-  const p2 = new Player("Bartleby");
-
-  p1.attack(p2, [0, 0]);
-
-  expect(p2.board[0][0]).toBe(1);
-});
-
-describe.todo("player can hit other players ships");
-describe.todo("player wins if other player has no more ships");

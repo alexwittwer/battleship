@@ -1,10 +1,11 @@
 export default class Ship {
-  constructor(health, id, player) {
+  constructor(health, id) {
+    this.start = null;
+    this.end = null;
     this.length = health;
     this.health = health;
     this.status = this.updateStatus(this.health);
     this.id = id;
-    this.player = player;
   }
 
   updateStatus(health = 0) {
