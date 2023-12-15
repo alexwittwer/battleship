@@ -47,8 +47,10 @@ export default class Gameboard {
     if (this.board[x][y] !== 0 && this.board[x][y] !== 1) {
       this.board[x][y].hit();
       this.board[x][y] = 1;
+      return true;
     } else {
       this.board[x][y] = 1;
+      return false;
     }
   }
 }

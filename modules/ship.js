@@ -13,7 +13,15 @@ export default class Ship {
   }
 
   hit() {
+    console.log(`${this.id} was hit!`);
     this.health--;
+    if (this.health === 0) {
+      console.log(`${this.id} was sunk!`);
+    }
     return this.health > 0 ? null : (this.status = this.updateStatus());
+  }
+
+  isSunk() {
+    return this.status === "sunk" ? true : false;
   }
 }

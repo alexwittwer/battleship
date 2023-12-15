@@ -100,3 +100,11 @@ test("unable to place ship on top of ship", () => {
   expect(p1.pboat.end).toBe(null);
   expect(p1.carrier.start).toStrictEqual([0, 0]);
 });
+
+test("alerts when a ship is hit", () => {
+  const p1 = new Player("tom");
+  p1.gameboard.placeShipV(p1.carrier, [0, 0]);
+
+  expect(p1.gameboard.receiveAttack(0, 0)).toBe(true);
+  expect(p1.gameboard.receiveAttack(5, 5)).toBe(false);
+});
