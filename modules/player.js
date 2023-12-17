@@ -1,5 +1,6 @@
 import Ship from "../modules/ship";
 import Gameboard from "../modules/board";
+import Game from "../modules/game";
 
 export default class Player {
   constructor(name, ai = false) {
@@ -11,10 +12,10 @@ export default class Player {
     this.submarine = new Ship(3, "Submarine");
     this.pboat = new Ship(2, "Patrol Boat");
     this.gameboard = new Gameboard();
+    this.wins = false;
   }
 
   makeAIAttack(player) {
-    if (this.ai === false) return;
     const x = Math.floor(Math.random() * 10);
     const y = Math.floor(Math.random() * 10);
     if (
@@ -31,7 +32,21 @@ export default class Player {
       this.makeAIAttack(player);
     } else {
       player.gameboard.receiveAttack(x, y);
-      console.log(x, y);
+      return { x, y };
+    }
+  }
+
+  makeAttack(enemy, [x, y]) {
+    if (enemy.gameboard.board[x][y] === 1) {
+      return null;
+    } else {
+      if (enemy.gameboard.receiveAttack(x, y)) {
+        this.makeAIAttack(this);
+        return true;
+      } else {
+        this.makeAIAttack(this);
+        return false;
+      }
     }
   }
 }
