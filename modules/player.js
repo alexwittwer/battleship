@@ -29,24 +29,10 @@ export default class Player {
     }
 
     if (player.gameboard.board[x][y] === 1) {
-      this.makeAIAttack(player);
+      return this.makeAIAttack(player);
     } else {
       player.gameboard.receiveAttack(x, y);
       return { x, y };
-    }
-  }
-
-  makeAttack(enemy, [x, y]) {
-    if (enemy.gameboard.board[x][y] === 1) {
-      return null;
-    } else {
-      if (enemy.gameboard.receiveAttack(x, y)) {
-        this.makeAIAttack(this);
-        return true;
-      } else {
-        this.makeAIAttack(this);
-        return false;
-      }
     }
   }
 }

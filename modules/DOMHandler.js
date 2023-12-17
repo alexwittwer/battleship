@@ -1,7 +1,7 @@
 import Game from "../modules/game";
 import Player from "./player";
 
-export function createPlayerGrid() {
+export function createPlayerGrid(player) {
   const gridContainer = document.createElement("section");
   gridContainer.classList.add("grid-container", "player");
 
@@ -10,8 +10,10 @@ export function createPlayerGrid() {
     gridRow.classList.add("row");
     for (let j = 0; j < 10; j++) {
       const gridItem = document.createElement("div");
-      gridItem.classList.add("grid-item");
-      gridItem.setAttribute("id", `cell_${i}_${j}`);
+      gridItem.classList.add("grid-item", `cell_${i}_${j}`);
+      if (player.gameboard.board[i][j]) {
+        gridItem.style.backgroundColor = "grey";
+      }
       gridRow.appendChild(gridItem);
     }
     gridContainer.append(gridRow);
@@ -20,7 +22,7 @@ export function createPlayerGrid() {
   return gridContainer;
 }
 
-export function createAIGrid(ai, player, game) {
+export function createAIGrid(ai, player) {
   const gridContainer = document.createElement("section");
   gridContainer.classList.add("grid-container", "ai");
 
@@ -29,18 +31,19 @@ export function createAIGrid(ai, player, game) {
     gridRow.classList.add("row");
     for (let j = 0; j < 10; j++) {
       const gridItem = document.createElement("div");
-      gridItem.classList.add("grid-item");
-      gridItem.setAttribute("id", `cell_${i}_${j}`);
+      gridItem.classList.add("grid-item", `cell_${i}_${j}`);
       gridItem.addEventListener("click", (e) => {
-        if (game.gameOver()) {
-          return;
-        } else if (player.makeAttack(ai, [j, i])) {
-          gridItem.classList.add("hit");
+        const x = i;
+        const y = j;
+        if (ai.gameboard.receiveAttack(x, y)) {
+          const { x, y } = ai.makeAIAttack(player);
+          const playerBoard = document.querySelector(`.player .cell_${x}_${y}`);
+          playerBoard.style.backgroundColor = "red";
           gridItem.style.backgroundColor = "red";
-          gridItem.textContent = "!!!";
         } else {
-          ai.makeAIAttack(player);
-          gridItem.removeEventListener("click", e);
+          const { x, y } = ai.makeAIAttack(player);
+          const playerBoard = document.querySelector(`.player .cell_${x}_${y}`);
+          playerBoard.style.backgroundColor = "red";
           gridItem.classList.add("miss");
         }
       });

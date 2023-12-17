@@ -12,14 +12,15 @@ const game = new Game(p1, ai);
 game.placeAIShips(ai);
 game.placeAIShips(p1);
 
-const p1grid = createPlayerGrid();
-const p2grid = createAIGrid(ai, p1, game);
+const p1grid = createPlayerGrid(p1);
+const p2grid = createAIGrid(ai, p1);
 
 app.append(p1grid, p2grid);
 
 document.body.addEventListener("click", (e) => {
-  console.log(p1.gameboard.board);
-  if (game.gameOver()) {
-    alert("game over");
+  if (p1.wins) {
+    alert("Player 1 wins!");
+  } else if (ai.wins) {
+    alert("Computer wins!");
   }
 });

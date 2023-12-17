@@ -11,7 +11,7 @@ export default class Game {
       if (ship.start === null) {
         const x = Math.floor(Math.random() * 10);
         const y = Math.floor(Math.random() * 10);
-        ai.gameboard.placeShipV(ship, [x, y]);
+        ai.gameboard.placeShipH(ship, [x, y]);
       }
     });
 
