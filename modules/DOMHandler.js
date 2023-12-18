@@ -50,7 +50,7 @@ export function createAIGrid(ai, player) {
           if (hit) {
             playerBoard.style.backgroundColor = "red"
           } else {
-            playerBoard.style.backgroundColor = "blue"
+            playerBoard.style.backgroundColor = "lightblue"
           }
           gridItem.classList.add("miss");
         }
