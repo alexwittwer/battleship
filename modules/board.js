@@ -20,7 +20,9 @@ export default class Gameboard {
   placeShipV(ship, [x, y]) {
     const length = ship.length;
     if (length + x > 9) return;
-    if (this.board[x][y] !== 0) return;
+    for (let i = y; i < length + y; i++) {
+      if (this.board[x][i] !== 0) return;
+    }
 
     ship.start = [x, y];
     ship.end = [x, length + y - 1];
@@ -33,7 +35,10 @@ export default class Gameboard {
   placeShipH(ship, [x, y]) {
     const length = ship.length;
     if (length + y > 9) return;
-    if (this.board[x][y] !== 0) return;
+
+    for (let i = y; i < y + length; i++) {
+      if (this.board[x][i] !== 0) return null;
+    }
 
     ship.start = [x, y];
     ship.end = [length + x - 1, y];
