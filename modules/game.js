@@ -25,25 +25,25 @@ export default class Game {
     });
   }
 
-  gameOver(p1 = this.p1, p2 = this.p2) {
+  gameOver(player1, player2) {
     if (
-      p1.carrier.isSunk() &&
-      p1.destroyer.isSunk() &&
-      p1.cruiser.isSunk() &&
-      p1.submarine.isSunk() &&
-      p1.pboat.isSunk()
+      player1.carrier.isSunk() &&
+      player1.destroyer.isSunk() &&
+      player1.cruiser.isSunk() &&
+      player1.submarine.isSunk() &&
+      player1.pboat.isSunk()
     ) {
-      p1.wins = true;
-      return true;
+      alert(player2.name + " wins!");
+      return (player2.wins = true);
     } else if (
-      p2.carrier.isSunk() &&
-      p2.destroyer.isSunk() &&
-      p2.cruiser.isSunk() &&
-      p2.submarine.isSunk() &&
-      p2.pboat.isSunk()
+      player2.carrier.isSunk() &&
+      player2.destroyer.isSunk() &&
+      player2.cruiser.isSunk() &&
+      player2.submarine.isSunk() &&
+      player2.pboat.isSunk()
     ) {
-      p2.wins = true;
-      return true;
+      alert(player1.name + " wins!");
+      return (player1.wins = true);
     } else {
       return false;
     }
