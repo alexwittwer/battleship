@@ -18,6 +18,7 @@ const p2grid = createAIGrid(ai, p1);
 app.append(p1grid, p2grid);
 
 document.body.addEventListener("click", (e) => {
+  game.gameOver();
   if (p1.wins) {
     alert("Player 1 wins!");
   } else if (ai.wins) {
