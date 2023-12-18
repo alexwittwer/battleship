@@ -18,6 +18,7 @@ export default class Player {
   makeAIAttack(player) {
     const x = Math.floor(Math.random() * 10);
     const y = Math.floor(Math.random() * 10);
+    let hit = false
     if (
       player.carrier.isSunk() &&
       player.destroyer.isSunk() &&
@@ -31,8 +32,11 @@ export default class Player {
     if (player.gameboard.board[x][y] === 1) {
       return this.makeAIAttack(player);
     } else {
+      if (player.gameboard.board[x][y]) {
+        hit = true
+      }
       player.gameboard.receiveAttack(x, y);
-      return { x, y };
+      return { x, y, hit};
     }
   }
 }
