@@ -36,14 +36,22 @@ export function createAIGrid(ai, player) {
         const x = i;
         const y = j;
         if (ai.gameboard.receiveAttack(x, y)) {
-          const { x, y } = ai.makeAIAttack(player);
+          const { x, y, hit } = ai.makeAIAttack(player);
           const playerBoard = document.querySelector(`.player .cell_${x}_${y}`);
-          playerBoard.style.backgroundColor = "red";
+          if (hit) {
+            playerBoard.style.backgroundColor = "red"
+          } else {
+            playerBoard.style.backgroundColor = "blue"
+          }
           gridItem.style.backgroundColor = "red";
         } else {
-          const { x, y } = ai.makeAIAttack(player);
+          const { x, y, hit } = ai.makeAIAttack(player);
           const playerBoard = document.querySelector(`.player .cell_${x}_${y}`);
-          playerBoard.style.backgroundColor = "red";
+          if (hit) {
+            playerBoard.style.backgroundColor = "red"
+          } else {
+            playerBoard.style.backgroundColor = "blue"
+          }
           gridItem.classList.add("miss");
         }
       });
